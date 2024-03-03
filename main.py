@@ -1,21 +1,20 @@
 from machine import Pin
 import time
 from device_mode import DeviceMode
-
+import mode_peripherals
 
 p = Pin(25, Pin.OUT)
 
-    
+
 def main():
     mode = DeviceMode.read_mode()
-    print(mode)
+    mode_peripherals.init_mode_peripherals()
     while True:
-        mode = DeviceMode(mode.mode + 1).save_mode()
         p.high()
         time.sleep(1)
         p.low()
         time.sleep(1)
-        print(DeviceMode.read_mode())
+
 
 if __name__ == "__main__":
     print("Hello World!")
