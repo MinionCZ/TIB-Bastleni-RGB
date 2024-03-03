@@ -30,6 +30,28 @@ class DeviceMode:
             output.write(str(self.mode))
         return self
 
+    def increase_mode_and_save(self, allow_overflow: bool = True) -> DeviceMode:
+        if allow_overflow:
+            self.mode += 1
+            self.mode %= len(DeviceMode.__AVAILABLE_MODES)
+        else:
+            self.mode += 1
+            if self.mode not in DeviceMode.__AVAILABLE_MODES:
+                raise ValueError(f"Error occurred during increasing of value of mode {self.mode}")
+        self.save_mode()
+        return self
+
+    def decrease_mode_and_save(self, allow_overflow: bool = True) -> DeviceMode:
+        if allow_overflow:
+            self.mode -= 1
+            self.mode = len(DeviceMode.__AVAILABLE_MODES) - 1 if self.mode < 0 else self.mode
+        else:
+            self.mode -= 1
+            if self.mode not in DeviceMode.__AVAILABLE_MODES:
+                raise ValueError(f"Error occurred during decreasing of value of mode {self.mode}")
+        self.save_mode()
+        return self
+
     def __check_if_saving_file_exists(self) -> bool:
         try:
             os.stat(self.__MODE_SAVING_PATH)
