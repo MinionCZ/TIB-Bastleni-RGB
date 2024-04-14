@@ -23,7 +23,7 @@ class DeviceMode:
             raise ValueError(f"Mode passed as parameter {mode} is invalid and should be in {self.__AVAILABLE_MODES}")
         self.mode = mode
 
-    def save_mode(self) -> DeviceMode:
+    def save_mode(self) -> 'DeviceMode':
         if not self.__check_if_saving_file_exists():
             os.mkdir(DeviceMode.__MODE_SAVING_DIRECTORY)
         with open(DeviceMode.__MODE_SAVING_PATH, "w") as output:
@@ -63,7 +63,7 @@ class DeviceMode:
         return f"Mode: {self.mode}"
 
     @classmethod
-    def read_mode(cls) -> DeviceMode:
+    def read_mode(cls) -> 'DeviceMode':
         try:
             with open(DeviceMode.__MODE_SAVING_PATH, "r") as inpt:
                 try:
