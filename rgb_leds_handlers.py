@@ -7,8 +7,8 @@ __leds = NeoPixel(__RGB_LEDS_PIN, __NUMBER_OF_LEDS)
 
 
 def __convert_potentiometer_reading_to_color(value: int) -> int:
-    value = value >> 8
-    percentage = (10 ** (value / 256) - 1) / 9
+    linear_value = 10 ** (value / 65535)
+    percentage = (linear_value - 1) / 9
     return int(255 * percentage)
 
 
