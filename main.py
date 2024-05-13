@@ -26,7 +26,7 @@ def main():
     while True:
         handle_rgb_mode(mode)
         mode = DeviceMode.read_mode()
-        time.sleep(0.01)
+        time.sleep(0.005)
 
 
 if __name__ == "__main__":
