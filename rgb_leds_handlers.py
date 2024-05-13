@@ -10,7 +10,7 @@ __blue_potentiometer = ADC(Pin(28, Pin.IN))
 __leds = NeoPixel(__RGB_LEDS_PIN, __NUMBER_OF_LEDS)
 
 __SNAKE_LENGTH = 10
-__SNAKE_SPEED_COEFFICIENT = 5
+__SNAKE_SPEED_COEFFICIENT = 3
 __snake_head_position: int = __SNAKE_LENGTH - 1
 __snake_going_forward: bool = True
 __snake_delay_counter: int = 0
