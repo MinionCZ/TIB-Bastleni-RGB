@@ -45,17 +45,9 @@ def handle_snake_mode() -> None:
         __snake_delay_counter += 1
         return
     __snake_delay_counter = 0
-    if __snake_head_position == __NUMBER_OF_LEDS + __SNAKE_LENGTH - 1:
-        __snake_head_position = __NUMBER_OF_LEDS - 1
-        __snake_going_forward = False
-    elif __snake_head_position == - __SNAKE_LENGTH + 1:
-        __snake_head_position = 0
-        __snake_going_forward = True
+    __handle_snake_movement()
     __draw_snake()
-    if __snake_going_forward:
-        __snake_head_position += 1
-    else:
-        __snake_head_position -= 1
+    __snake_head_position = __snake_head_position + 1 if __snake_going_forward else __snake_head_position - 1
 
 
 def handle_rainbow_mode() -> None:
@@ -76,23 +68,34 @@ def clear_status() -> None:
     __snake_going_forward = True
 
 
+def __handle_snake_movement() -> None:
+    global __snake_head_position, __snake_going_forward, __snake_delay_counter
+    if __snake_head_position == __NUMBER_OF_LEDS + __SNAKE_LENGTH - 1:
+        __snake_head_position = __NUMBER_OF_LEDS - 1
+        __snake_going_forward = False
+    elif __snake_head_position == - __SNAKE_LENGTH + 1:
+        __snake_head_position = 0
+        __snake_going_forward = True
+
+
 def __draw_snake() -> None:
     red, green, blue = __get_user_selected_colors()
     coefficient = 1 / __SNAKE_LENGTH
+
+    def write_to_led(index: int, start_write_index: int, end_write_index: int) -> float:
+        if start_write_index <= index <= end_write_index:
+            __leds[i] = (int(green * coefficient), int(red * coefficient), int(blue * coefficient))
+            return 1 / __SNAKE_LENGTH
+        else:
+            __leds[i] = (0, 0, 0)
+        return 0
+
     if __snake_going_forward:
         start = __snake_head_position - __SNAKE_LENGTH + 1
         for i in range(__NUMBER_OF_LEDS):
-            if start <= i <= __snake_head_position:
-                __leds[i] = (int(green * coefficient), int(red * coefficient), int(blue * coefficient))
-                coefficient += 1 / __SNAKE_LENGTH
-            else:
-                __leds[i] = (0, 0, 0)
+            coefficient += write_to_led(i, start, __snake_head_position)
     else:
         end = __snake_head_position + __SNAKE_LENGTH - 1
         for i in range(__NUMBER_OF_LEDS - 1, -1, -1):
-            if __snake_head_position <= i <= end:
-                __leds[i] = (int(green * coefficient), int(red * coefficient), int(blue * coefficient))
-                coefficient += 1 / __SNAKE_LENGTH
-            else:
-                __leds[i] = (0, 0, 0)
+            coefficient += write_to_led(i, __snake_head_position, end)
     __leds.write()
