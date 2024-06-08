@@ -1,4 +1,4 @@
-from handlers.common_leds_handlers import get_user_selected_colors, leds, NUMBER_OF_LEDS
+from handlers.common_utils import get_user_selected_colors, leds, NUMBER_OF_LEDS
 
 __SNAKE_LENGTH = 10
 __SNAKE_SPEED_COEFFICIENT = 3

@@ -3,11 +3,14 @@ from machine import Pin, ADC
 
 __RGB_LEDS_PIN: Pin = Pin(15, Pin.OUT)
 NUMBER_OF_LEDS = 60
+leds = NeoPixel(__RGB_LEDS_PIN, NUMBER_OF_LEDS)
+
+__HUE_PERIOD = 360
+__MAX_COLOR_VALUE = 255
+
 __red_potentiometer = ADC(Pin(26, Pin.IN))
 __green_potentiometer = ADC(Pin(27, Pin.IN))
 __blue_potentiometer = ADC(Pin(28, Pin.IN))
-
-leds = NeoPixel(__RGB_LEDS_PIN, NUMBER_OF_LEDS)
 
 
 def __convert_potentiometer_reading_to_color(value: int) -> int:
@@ -36,3 +39,37 @@ def handle_pulsing_single_color_mode() -> None:
 
 def handle_hsv_transition_mode() -> None:
     print("handling hsv transition mode")
+
+
+def hsv_to_rgb(h: float, s: float, v: float) -> (int, int, int):
+    __validate_hsv_color(s, v)
+    modulated_h = h % __HUE_PERIOD
+    c = v * s
+    x = c * (1 - abs((modulated_h / 60) % 2 - 1))
+    m = v - c
+    r_coef, g_coef, b_coef = __calculate_rgb_coefficients(modulated_h, c, x)
+    r = (r_coef + m) * __MAX_COLOR_VALUE
+    g = (g_coef + m) * __MAX_COLOR_VALUE
+    b = (b_coef + m) * __MAX_COLOR_VALUE
+    return int(r), int(g), int(b)
+
+
+def __calculate_rgb_coefficients(h: float, c: float, x: float) -> (float, float, float):
+    if h < 60:
+        return c, x, 0
+    elif h < 120:
+        return x, c, 0
+    elif h < 180:
+        return 0, c, x
+    elif h < 240:
+        return 0, x, c
+    elif h < 300:
+        return x, 0, c
+    return c, 0, x
+
+
+def __validate_hsv_color(s: float, v: float) -> None:
+    if s > 1.0 or s < 0:
+        raise ValueError(f"Saturation value ({s}) is not in range from 0 to 1")
+    if v > 1.0 or v < 0:
+        raise ValueError(f"Value value ({v}) is not in range from 0 to 1")
