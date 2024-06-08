@@ -26,13 +26,6 @@ def get_user_selected_colors() -> (int, int, int):
     return red, green, blue
 
 
-def handle_single_color_mode() -> None:
-    red, green, blue = get_user_selected_colors()
-    for i in range(NUMBER_OF_LEDS):
-        leds[i] = (green, red, blue)
-    leds.write()
-
-
 def handle_rainbow_mode() -> None:
     print("handling rainbow mode")
 
@@ -43,4 +36,3 @@ def handle_pulsing_single_color_mode() -> None:
 
 def handle_hsv_transition_mode() -> None:
     print("handling hsv transition mode")
-

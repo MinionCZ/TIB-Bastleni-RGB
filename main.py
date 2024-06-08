@@ -2,8 +2,9 @@ from machine import Pin
 import time
 from device_mode import DeviceMode
 import mode_peripherals
-from handlers.common_leds_handlers import handle_single_color_mode, handle_rainbow_mode, \
+from handlers.common_leds_handlers import handle_rainbow_mode, \
     handle_pulsing_single_color_mode, handle_hsv_transition_mode
+from handlers.single_color_handler import handle_single_color_mode
 from handlers.snake_handler import handle_snake_mode
 
 p = Pin(25, Pin.OUT)
