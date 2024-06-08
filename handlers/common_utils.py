@@ -5,7 +5,7 @@ __RGB_LEDS_PIN: Pin = Pin(15, Pin.OUT)
 NUMBER_OF_LEDS = 60
 leds = NeoPixel(__RGB_LEDS_PIN, NUMBER_OF_LEDS)
 
-__HUE_PERIOD = 360
+HUE_PERIOD = 360
 __MAX_COLOR_VALUE = 255
 
 __red_potentiometer = ADC(Pin(26, Pin.IN))
@@ -29,8 +29,7 @@ def get_user_selected_colors() -> (int, int, int):
     return red, green, blue
 
 
-def handle_rainbow_mode() -> None:
-    print("handling rainbow mode")
+
 
 
 def handle_pulsing_single_color_mode() -> None:
@@ -43,7 +42,7 @@ def handle_hsv_transition_mode() -> None:
 
 def hsv_to_rgb(h: float, s: float, v: float) -> (int, int, int):
     __validate_hsv_color(s, v)
-    modulated_h = h % __HUE_PERIOD
+    modulated_h = h % HUE_PERIOD
     c = v * s
     x = c * (1 - abs((modulated_h / 60) % 2 - 1))
     m = v - c
