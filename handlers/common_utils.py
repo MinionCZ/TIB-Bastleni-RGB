@@ -29,15 +29,8 @@ def get_user_selected_colors() -> (int, int, int):
     return red, green, blue
 
 
-
-
-
 def handle_pulsing_single_color_mode() -> None:
     print("handling pulsing single color mode")
-
-
-def handle_hsv_transition_mode() -> None:
-    print("handling hsv transition mode")
 
 
 def hsv_to_rgb(h: float, s: float, v: float) -> (int, int, int):

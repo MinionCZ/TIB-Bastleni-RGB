@@ -21,7 +21,8 @@ def __show_rainbow() -> None:
     global __rainbow_start_index
     for i in range(NUMBER_OF_LEDS):
         led_index = (i + __rainbow_start_index) % NUMBER_OF_LEDS
-        leds[led_index] = hsv_to_rgb(i * __HUE_INCREMENT, __DEFAULT_SATURATION, __DEFAULT_VALUE)
+        r, g, b = hsv_to_rgb(i * __HUE_INCREMENT, __DEFAULT_SATURATION, __DEFAULT_VALUE)
+        leds[led_index] = g, r, b
     leds.write()
     __rainbow_start_index += 1
     __rainbow_start_index %= NUMBER_OF_LEDS
