@@ -2,8 +2,8 @@ from machine import Pin
 import time
 from device_mode import DeviceMode
 import mode_peripherals
-from handlers.common_utils import handle_pulsing_colors_mode
 from handlers.hsv_transition_handler import handle_hsv_transition_mode
+from handlers.pulsing_colors_handler import handle_pulsing_colors_mode
 from handlers.rainbow_mode_handler import handle_rainbow_mode
 from handlers.single_color_handler import handle_single_color_mode
 from handlers.snake_handler import handle_snake_mode

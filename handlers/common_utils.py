@@ -29,10 +29,6 @@ def get_user_selected_colors() -> (int, int, int):
     return red, green, blue
 
 
-def handle_pulsing_colors_mode() -> None:
-    print("handling pulsing single color mode")
-
-
 def hsv_to_rgb(h: float, s: float, v: float) -> (int, int, int):
     __validate_hsv_color(s, v)
     modulated_h = h % HUE_PERIOD
