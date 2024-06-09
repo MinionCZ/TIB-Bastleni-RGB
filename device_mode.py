@@ -3,7 +3,7 @@ import os
 
 class DeviceMode:
     SINGLE_COLOR_MODE: int = 0
-    PULSING_SINGLE_COLOR_MODE: int = 1
+    PULSING_COLORS_MODE: int = 1
     HSV_RAINBOW_MODE: int = 2
     HSV_TRANSITION_MODE: int = 3
     SNAKE_MODE: int = 4
@@ -11,7 +11,7 @@ class DeviceMode:
     __MODE_SAVING_DIRECTORY: str = "data"
     __MODE_SAVING_PATH = f"/{__MODE_SAVING_DIRECTORY}/{__MODE_SAVING_FILE_NAME}"
     __AVAILABLE_MODES: frozenset[int] = frozenset([SINGLE_COLOR_MODE,
-                                                   PULSING_SINGLE_COLOR_MODE,
+                                                   PULSING_COLORS_MODE,
                                                    HSV_RAINBOW_MODE,
                                                    HSV_TRANSITION_MODE,
                                                    SNAKE_MODE])

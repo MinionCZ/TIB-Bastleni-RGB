@@ -29,7 +29,7 @@ def get_user_selected_colors() -> (int, int, int):
     return red, green, blue
 
 
-def handle_pulsing_single_color_mode() -> None:
+def handle_pulsing_colors_mode() -> None:
     print("handling pulsing single color mode")
 
 
