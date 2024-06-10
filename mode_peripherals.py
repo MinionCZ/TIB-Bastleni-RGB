@@ -2,6 +2,11 @@ from machine import Pin
 from device_mode import DeviceMode
 import time
 
+from handlers.hsv_transition_handler import clear_transition
+from handlers.pulsing_colors_handler import clear_pulsing
+from handlers.rainbow_mode_handler import clear_rainbow
+from handlers.snake_handler import clear_snake_status
+
 __LED_PIN_NUMBERS: list[int] = [5, 7, 8, 9, 10]
 __LED_PINS: list[Pin] = [
     Pin(pin_number, Pin.OUT) for pin_number in __LED_PIN_NUMBERS
@@ -49,6 +54,7 @@ def __handle_mode_decrease(pin: Pin) -> None:
     global __actual_mode
     __actual_mode = __actual_mode.decrease_mode_and_save()
     __turn_on_led_by_mode(__actual_mode)
+    __clear_states()
 
 
 def __handle_mode_increase(pin: Pin) -> None:
@@ -60,3 +66,11 @@ def __handle_mode_increase(pin: Pin) -> None:
     global __actual_mode
     __actual_mode = __actual_mode.increase_mode_and_save()
     __turn_on_led_by_mode(__actual_mode)
+    __clear_states()
+
+
+def __clear_states() -> None:
+    clear_transition()
+    clear_rainbow()
+    clear_snake_status()
+    clear_pulsing()

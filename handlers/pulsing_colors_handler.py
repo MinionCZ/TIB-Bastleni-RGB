@@ -44,3 +44,11 @@ def __handle_value_changes() -> None:
             __incrementing = True
             __hue += __HUE_STEP
             __hue %= HUE_PERIOD
+
+
+def clear_pulsing() -> None:
+    global __hue, __value_step, __incrementing, __delay_counter
+    __hue = 0
+    __value_step = 0
+    __incrementing = True
+    __delay_counter = 0
