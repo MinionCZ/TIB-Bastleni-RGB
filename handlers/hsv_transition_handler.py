@@ -3,7 +3,7 @@ from handlers.common_utils import NUMBER_OF_LEDS, leds, hsv_to_rgb, HUE_PERIOD
 __HUE_STEP = 3.0
 __DEFAULT_SATURATION = 1.0
 __DEFAULT_VALUE = 1.0
-__HSV_TRANSITION_DELAY_COEFFICIENT = 5
+__HSV_TRANSITION_DELAY_COEFFICIENT = 6
 
 __delay_counter = 0
 __hue = 0
