@@ -1,9 +1,11 @@
 import os
 
 
+# Tato třída má v sobě zadefinované jednotlivé módy a stará se o držení stavu v jakém módu se zařízení nachází.
+# Data si drží tak, že si vytvoří (pokud neexistuje) adresář data a v něm soubor mode.txt do kterého si uloží aktuální mód
 class DeviceMode:
     SINGLE_COLOR_MODE: int = 0
-    PULSING_SINGLE_COLOR_MODE: int = 1
+    PULSING_COLORS_MODE: int = 1
     HSV_RAINBOW_MODE: int = 2
     HSV_TRANSITION_MODE: int = 3
     SNAKE_MODE: int = 4
@@ -11,7 +13,7 @@ class DeviceMode:
     __MODE_SAVING_DIRECTORY: str = "data"
     __MODE_SAVING_PATH = f"/{__MODE_SAVING_DIRECTORY}/{__MODE_SAVING_FILE_NAME}"
     __AVAILABLE_MODES: frozenset[int] = frozenset([SINGLE_COLOR_MODE,
-                                                   PULSING_SINGLE_COLOR_MODE,
+                                                   PULSING_COLORS_MODE,
                                                    HSV_RAINBOW_MODE,
                                                    HSV_TRANSITION_MODE,
                                                    SNAKE_MODE])
@@ -23,6 +25,7 @@ class DeviceMode:
             raise ValueError(f"Mode passed as parameter {mode} is invalid and should be in {self.__AVAILABLE_MODES}")
         self.mode = mode
 
+    # Tato metoda slouží k uložení aktuálního módu drženého touto třídou do flash paměti (na pevný disk)
     def save_mode(self) -> 'DeviceMode':
         if not self.__check_if_saving_file_exists():
             os.mkdir(DeviceMode.__MODE_SAVING_DIRECTORY)
@@ -30,7 +33,8 @@ class DeviceMode:
             output.write(str(self.mode))
         return self
 
-    def increase_mode_and_save(self, allow_overflow: bool = True) -> DeviceMode:
+    # Tato metoda slouží k inkrementaci a následnému uložení aktuálního módu drženého touto třídou do flash paměti (na pevný disk)
+    def increase_mode_and_save(self, allow_overflow: bool = True) -> 'DeviceMode':
         if allow_overflow:
             self.mode += 1
             self.mode %= len(DeviceMode.__AVAILABLE_MODES)
@@ -41,7 +45,8 @@ class DeviceMode:
         self.save_mode()
         return self
 
-    def decrease_mode_and_save(self, allow_overflow: bool = True) -> DeviceMode:
+    # Tato metoda slouží k dekrementaci a následnému uložení aktuálního módu drženého touto třídou do flash paměti (na pevný disk)
+    def decrease_mode_and_save(self, allow_overflow: bool = True) -> 'DeviceMode':
         if allow_overflow:
             self.mode -= 1
             self.mode = len(DeviceMode.__AVAILABLE_MODES) - 1 if self.mode < 0 else self.mode
@@ -62,6 +67,7 @@ class DeviceMode:
     def __str__(self) -> str:
         return f"Mode: {self.mode}"
 
+    # Tato třídní metodu si přečte z flash paměti uloženou hodnotu a vrátí novou instanci této třídy
     @classmethod
     def read_mode(cls) -> 'DeviceMode':
         try:
