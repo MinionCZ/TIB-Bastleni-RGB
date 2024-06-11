@@ -1,4 +1,4 @@
-from handlers.common_utils import NUMBER_OF_LEDS, leds, hsv_to_rgb, HUE_PERIOD
+from src.handlers.common_utils import NUMBER_OF_LEDS, leds, hsv_to_rgb, HUE_PERIOD
 
 # Zde jsou nadefinovány konstanty ovlivňujicí duhu
 __RAINBOW_DELAY_COEFFICIENT = 4  # Parametr duhy, který ovlivňuje kolik tiků procesoru bude duha stát. Tedy v základním nastavení 4 tiky stojí

@@ -1,4 +1,4 @@
-from handlers.common_utils import get_user_selected_colors, NUMBER_OF_LEDS, leds
+from src.handlers.common_utils import get_user_selected_colors, NUMBER_OF_LEDS, leds
 
 
 # Tento soubor představuje handler pro jednu barvu zadanou uživatelem pomocí potenciometrů

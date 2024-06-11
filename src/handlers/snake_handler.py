@@ -1,4 +1,4 @@
-from handlers.common_utils import get_user_selected_colors, leds, NUMBER_OF_LEDS
+from src.handlers.common_utils import get_user_selected_colors, leds, NUMBER_OF_LEDS
 
 # Parametry pro nastavení chování hada
 __SNAKE_LENGTH = 10  # Délka hada v počtu ledek na pásku

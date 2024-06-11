@@ -1,4 +1,4 @@
-from handlers.common_utils import NUMBER_OF_LEDS, leds, hsv_to_rgb, HUE_PERIOD
+from src.handlers.common_utils import NUMBER_OF_LEDS, leds, hsv_to_rgb, HUE_PERIOD
 
 # Tento soubor slouží pro obsluhu módu, který se stará o postupné zobrazení všech barev duhy na pásce (všech barev v HSV).
 # Princip je takový, že se posuptně cyklicky příčítá konstanta k HUE a tím dochází k postupným změnám barev

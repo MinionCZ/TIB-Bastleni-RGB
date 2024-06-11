@@ -1,4 +1,4 @@
-from handlers.common_utils import hsv_to_rgb, NUMBER_OF_LEDS, leds, HUE_PERIOD
+from src.handlers.common_utils import hsv_to_rgb, NUMBER_OF_LEDS, leds, HUE_PERIOD
 
 # Tento soubor slouží jako implementace módu, který se stará o pulsování barev duhy.
 

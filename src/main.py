@@ -1,4 +1,3 @@
-from machine import Pin
 import time
 from device_mode import DeviceMode
 import mode_peripherals
