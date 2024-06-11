@@ -8,8 +8,7 @@ from handlers.rainbow_mode_handler import handle_rainbow_mode
 from handlers.single_color_handler import handle_single_color_mode
 from handlers.snake_handler import handle_snake_mode
 
-__SLEEP_DURATION = 0.005 # Konstanta určujicí dobu spánku. Doba spánku nám zde vlastně pomáhá s časováním v různých efektech. Vzásadě nám to určuje jak často procesor kontroluje vstupy a výstupy
-
+__SLEEP_DURATION = 0.005  # Konstanta určujicí dobu spánku. Doba spánku nám zde vlastně pomáhá s časováním v různých efektech. Vzásadě nám to určuje jak často procesor kontroluje vstupy a výstupy. Dále by se to dalo představit jako tik procesoru
 
 # Tento slovník (dict) funguje tak, že v sobě má vždy hodnotu klíč a odkaz na funkci. Tedy my jsme udělali slovník našich
 # módů (klíč je mód) a funkcí, které se starají o daný mód (hodnota je odkaz na funkci).

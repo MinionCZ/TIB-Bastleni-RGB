@@ -1,12 +1,14 @@
 from handlers.common_utils import get_user_selected_colors, leds, NUMBER_OF_LEDS
 
-__SNAKE_LENGTH = 10
-__SNAKE_SPEED_COEFFICIENT = 3
+# Parametry pro nastavení chování hada
+__SNAKE_LENGTH = 10  # Délka hada v počtu ledek na pásku
+__SNAKE_SPEED_COEFFICIENT = 3  # Toto je zpomalovací konstanta, která se stará o změnu rychlosti hada. Tato konstanta nám říká, kolik tiků procesoru má had vynechat před tím, než se posune. Výchozí hodnota jsou 3. Čím vyšší hodnota, tím had pojede pomaleji
 __snake_head_position: int = __SNAKE_LENGTH - 1
 __snake_going_forward: bool = True
 __snake_delay_counter: int = 0
 
 
+# Tato funkce slouží jako hlavní obsluha hadího módu
 def handle_snake_mode() -> None:
     global __snake_head_position, __snake_going_forward, __snake_delay_counter
     if __snake_delay_counter < __SNAKE_SPEED_COEFFICIENT:
@@ -18,6 +20,7 @@ def handle_snake_mode() -> None:
     __snake_head_position = __snake_head_position + 1 if __snake_going_forward else __snake_head_position - 1
 
 
+# Tato pomocná funkce se stará o správný pohyb hada. Tedy posouvá index hlavy
 def __handle_snake_movement() -> None:
     global __snake_head_position, __snake_going_forward, __snake_delay_counter
     if __snake_head_position == NUMBER_OF_LEDS + __SNAKE_LENGTH - 1:
@@ -28,6 +31,7 @@ def __handle_snake_movement() -> None:
         __snake_going_forward = True
 
 
+# Tato pomocná funkce má za úkol vykreslit hada na pásku. Hada kreslí tak, že čím jsou ledky dál od hlavy k ocasu tak tím svítí méně, aby byl docílen efekt hada
 def __draw_snake() -> None:
     red, green, blue = get_user_selected_colors()
     coefficient = 1 / __SNAKE_LENGTH
@@ -51,6 +55,7 @@ def __draw_snake() -> None:
     leds.write()
 
 
+# Tato funkce slouží k nastavení stavu hada do výchozí polohy
 def clear_snake_status() -> None:
     global __snake_head_position, __snake_going_forward
     __snake_head_position: int = __SNAKE_LENGTH - 1
