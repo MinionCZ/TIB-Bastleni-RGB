@@ -57,6 +57,7 @@ def __draw_snake() -> None:
 
 # Tato funkce slouží k nastavení stavu hada do výchozí polohy
 def clear_snake_status() -> None:
-    global __snake_head_position, __snake_going_forward
+    global __snake_head_position, __snake_going_forward, __snake_delay_counter
     __snake_head_position: int = __SNAKE_LENGTH - 1
     __snake_going_forward = True
+    __snake_delay_counter = 0

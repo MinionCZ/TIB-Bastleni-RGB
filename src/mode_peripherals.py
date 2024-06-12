@@ -66,7 +66,7 @@ def __handle_mode_decrease(pin: Pin) -> None:
     global __actual_mode
     __actual_mode = __actual_mode.decrease_mode_and_save()
     __turn_on_led_by_mode(__actual_mode)
-    __clear_states()
+    # __clear_states()
 
 
 # Tato funkce po stisknutí tlačítka zvýší mód o 1
@@ -79,7 +79,7 @@ def __handle_mode_increase(pin: Pin) -> None:
     global __actual_mode
     __actual_mode = __actual_mode.increase_mode_and_save()
     __turn_on_led_by_mode(__actual_mode)
-    __clear_states()
+    # __clear_states()
 
 
 # Tato pomocná funkce je volána při změně módu. Slouží k tomu, aby nám vynulovala stav jednotlivých handlerů pro módy. Tedy například u hada máme informaci o tom, kde má hlavu a kam jede a aby nám vždy had začínal od začátku tak je potřeba tyto informace ve správnou chvíli nastavit na výchozí hodnotu.
